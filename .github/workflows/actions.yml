@@ -26,11 +26,13 @@ jobs:
       # Step 4: Build the Docker image
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ github.repository_owner | toLower }}/dockerbuild/edexa-api:${{ env.build_number }} .
-          docker tag ghcr.io/${{ github.repository_owner | toLower }}/dockerbuild/edexa-api:${{ env.build_number }} ghcr.io/${{ github.repository_owner | toLower }}/dockerbuild/edexa-api:latest
+          LOWERCASE_REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:${{ env.build_number }} .
+          docker tag ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:${{ env.build_number }} ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:latest
 
       # Step 5: Push both tags
       - name: Push Docker images
         run: |
-          docker push ghcr.io/${{ github.repository_owner | toLower }}/dockerbuild/edexa-api:${{ env.build_number }}
-          docker push ghcr.io/${{ github.repository_owner | toLower }}/dockerbuild/edexa-api:latest
+          LOWERCASE_REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          docker push ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:${{ env.build_number }}
+          docker push ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:latest
