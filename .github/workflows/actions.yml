@@ -36,3 +36,6 @@ jobs:
           LOWERCASE_REPO_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           docker push ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:${{ env.build_number }}
           docker push ghcr.io/${LOWERCASE_REPO_OWNER}/dockerbuild/edexa-api:latest
+
+
+          
